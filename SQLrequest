@@ -1,0 +1,8 @@
+SELECT A.ProductId, COUNT(DISTINCT A.CustomerId)
+FROM Sales A
+INNER JOIN
+(SELECT CustomerId, MIN(Date) Date
+FROM Sales
+GROUP BY CustomerId) B
+ON A.ProductId=B.ProductId AND A.CustomerId=B.CustomerId AND A.DateCreated=B.DateCreated
+GROUP BY A.ProductId
